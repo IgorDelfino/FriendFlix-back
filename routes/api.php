@@ -39,3 +39,12 @@ Route::put('atualizarComentario/{id}', 'CommentController@updateComment');
 Route::delete('deletarComentario/{id}', 'CommentController@deleteComment');
 Route::put('relacionar/{id}', 'CommentController@addUser');
 Route::put('removerRelacionamento/{id}', 'CommentController@removeUser');
+
+//Rotas usadas para Passport
+Route::post('register', 'API\PassportController@register');
+Route::post('login','API\PassportController@login');
+
+Route::group(['middleware'=>'auth:api'], function() {
+    Route::post('logout','API\PassportController@logout');
+    Route::get('getDetails','API\PassportController@getDetails');
+});
